@@ -53,3 +53,6 @@ def baixarMp4():
     os.rename(os.path.join(pasta, nome_arquivo), arquivo_destino)
 
     return send_file(arquivo_destino, as_attachment=True)
+
+if __name__ == '__main__':
+    app.run(debug=True)
