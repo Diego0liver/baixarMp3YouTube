@@ -36,8 +36,12 @@
     <div class="container text-center mt-5 rounded" style="background-color: #f8f9fa;">
         <h2 class="pt-5">Download de video do YouTube para MP3 ou MP4</h2>
         <p class="pb-4">Converta e baixe vídeos do YouTube para MP3 ou MP4 gratuitamente</p>
+        <div id="loadingMessage" style="display: none;" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Baixando...</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         <div class="container d-flex justify-content-center align-items-center">
-            <form action="/baixarMp3" method="post">
+            <form id="downloadForm" action="/baixarMp3" method="post">
                 <div class="row">
                     <div class="col-auto">
                         <label class="visually-hidden">URL YouTube</label>
@@ -48,7 +52,7 @@
                         <input type="text" name="urlMp3" id="urlMp3" class="form-control" placeholder="URL do video do YouTube">
                     </div>
                         <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mb-3">
+                        <button id="baixar" type="submit" class="btn btn-primary mb-3">
                             Baixar MP3&nbsp;&nbsp;<img style="width: 30px;" src="{{ url_for('static', filename='img/audio.png') }}" />
                         </button>
                     </div>
@@ -56,7 +60,7 @@
             </form>
         </div>
         <div class="container d-flex justify-content-center align-items-center">
-            <form action="/baixarMp4" method="post">
+            <form id="downloadFormVideo" action="/baixarMp4" method="post">
                 <div class="row">
                     <div class="col-auto">
                         <label for="staticEmail2" class="visually-hidden">URL YouTube</label>
@@ -84,5 +88,21 @@
             <a target="_blank" href="https://diegodev.vercel.app/"><p>Desenvolvido por Diego Oliveira</p></a>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('downloadForm').addEventListener('submit', function() {
+            document.getElementById('loadingMessage').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('loadingMessage').style.display = 'none';
+            }, 8000);
+        });
+
+        document.getElementById('downloadFormVideo').addEventListener('submit', function() {
+            document.getElementById('loadingMessage').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('loadingMessage').style.display = 'none';
+            }, 8000);
+        });
+    </script>
 </body>
 </html>
