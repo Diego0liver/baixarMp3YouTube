@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<div class="container text-center mt-5 rounded" style="background-color: #f8f9fa;">
+    <h2 class="pt-5">Gerador de QR Code de URLs </h2>
+    <p class="pb-4">Uma ferramenta para gerar QR Code de URLs</p>
+    <div id="loadingMessage" style="display: none;" class="alert alert-primary alert-dismissible fade show" role="alert">
+        <strong>Carregando...</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="container d-flex justify-content-center align-items-center">
+        <form id="downloadForm" action="/gerarQrCode" method="post">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="visually-hidden">URL para gerar</label>
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="URL para gerar QR code">
+                </div>
+                <div class="col-auto">
+                    <label class="visually-hidden">URL para gerar</label>
+                    <input type="text" name="linkQr" id="url" class="form-control" placeholder="Cole a URL para QR Code">
+                </div>
+                    <div class="col-auto">
+                    <button id="baixar" type="submit" class="btn btn-primary mb-3">
+                        Gerar QR Code&nbsp;&nbsp;<img style="width: 30px;" src="{{ url_for('static', filename='img/flacha-icon.png') }}" />
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock  %}

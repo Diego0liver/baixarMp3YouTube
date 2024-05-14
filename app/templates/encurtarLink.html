@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<div class="container text-center mt-5 rounded" style="background-color: #f8f9fa;">
+    <h2 class="pt-5">Encurtador de URLs </h2>
+    <p class="pb-4">Uma ferramenta para encurtar URLs e gerar links curtos
+        Com o encurtador de URL é possível criar um link encurtado fácil de compartilhar</p>
+    <div id="loadingMessage" style="display: none;" class="alert alert-primary alert-dismissible fade show" role="alert">
+        <strong>Carregando...</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="container d-flex justify-content-center align-items-center">
+        <form id="downloadForm" action="/encurtarLink" method="post">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="visually-hidden">URL para encurtar</label>
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="URL para encurtar">
+                </div>
+                <div class="col-auto">
+                    <label class="visually-hidden">URL para encurtar</label>
+                    <input type="text" name="url" id="url" class="form-control" placeholder="Cole a URL para ser encurtada">
+                </div>
+                    <div class="col-auto">
+                    <button id="baixar" type="submit" class="btn btn-primary mb-3">
+                        Encurtar&nbsp;&nbsp;<img style="width: 30px;" src="{{ url_for('static', filename='img/link-quebrado.png') }}" />
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% if new_link == None %}
+        <h1></h1>
+    {% else %}
+        <h1>{{ new_link }}</h1>
+    {% endif %}        
+</div>
+{% endblock  %}

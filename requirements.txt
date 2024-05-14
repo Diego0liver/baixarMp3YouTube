@@ -1,0 +1,4 @@
+flask
+pytube
+pyshorteners
+qrcode

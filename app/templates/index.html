@@ -1,108 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <title>Convert arquivos</title>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <img style="border-radius: 100%; width: 130px;" src="{{ url_for('static', filename='img/logoGif.gif') }}" class="p-3" />
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse p-3" id="navbarNav">
-                <h2>Download to convert</h2>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active fs-4" aria-current="page" href="#">Download YouTube</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-4" href="#">Converter video</a>
-                    </li>
-                </ul>
+{% extends 'base.html' %}
+{% block conteudo %}
+    <div class="container">
+        <di class="row">
+            <div class="col-md-4 mt-5">
+                <div class="border border-secondary rounded p-2">
+                    <div style="background-color: #f4eada;" class="p-5 rounded">
+                        <p class="fs-3">Baixar video & MP3 do YouTube</p>
+                    </div>
+                    <div class="d-flex justify-content-between p-2">
+                        <img src="{{ url_for('static', filename='img/movie-icon.png') }}" style="width: 50px; height: 50px;" alt="">
+                        <a href="/baixarVideo">
+                            <img class="seta" src="{{ url_for('static', filename='img/next-icon.png') }}"  style="width: 50px; height: 50px;" alt="">
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
-    
-    <div class="container text-center mt-5 rounded" style="background-color: #f8f9fa;">
-        <h2 class="pt-5">Download de video do YouTube para MP3 ou MP4</h2>
-        <p class="pb-4">Converta e baixe vídeos do YouTube para MP3 ou MP4 gratuitamente</p>
-        <div id="loadingMessage" style="display: none;" class="alert alert-primary alert-dismissible fade show" role="alert">
-            <strong>Baixando...</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <div class="container d-flex justify-content-center align-items-center">
-            <form id="downloadForm" action="/baixarMp3" method="post">
-                <div class="row">
-                    <div class="col-auto">
-                        <label class="visually-hidden">URL YouTube</label>
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="URL YouTube">
+            <div class="col-md-4 mt-5">
+                <div class="border border-secondary rounded p-2">
+                    <div style="background-color: #edf2e3;" class="p-5 rounded">
+                        <p class="fs-3">Converter video em MP3</p>
                     </div>
-                    <div class="col-auto">
-                        <label class="visually-hidden">URL</label>
-                        <input type="text" name="urlMp3" id="urlMp3" class="form-control" placeholder="URL do video do YouTube">
-                    </div>
-                        <div class="col-auto">
-                        <button id="baixar" type="submit" class="btn btn-primary mb-3">
-                            Baixar MP3&nbsp;&nbsp;<img style="width: 30px;" src="{{ url_for('static', filename='img/audio.png') }}" />
-                        </button>
+                    <div class="d-flex justify-content-between p-2">
+                        <img src="{{ url_for('static', filename='img/music-icon.png') }}"  style="width: 50px; height: 50px;" alt="">
+                        <img class="seta" src="{{ url_for('static', filename='img/next-icon.png') }}"  style="width: 50px; height: 50px;" alt="">
                     </div>
                 </div>
-            </form>
-        </div>
-        <div class="container d-flex justify-content-center align-items-center">
-            <form id="downloadFormVideo" action="/baixarMp4" method="post">
-                <div class="row">
-                    <div class="col-auto">
-                        <label for="staticEmail2" class="visually-hidden">URL YouTube</label>
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="URL YouTube">
+            </div>
+            <div class="col-md-4 mt-5">
+                <div class="border border-secondary rounded p-2">
+                    <div style="background-color: #edf2e3;" class="p-5 rounded">
+                        <p class="fs-3">Remover fundo de Imagem</p>
                     </div>
-                    <div class="col-auto">
-                        <label for="inputPassword2" class="visually-hidden">URL</label>
-                        <input type="text" id="urlMp4" name="urlMp4" class="form-control" placeholder="URL do video do YouTube">
-                    </div>
-                        <div class="col-auto">
-                        <button type="submit" class="btn btn-success mb-3">
-                            Baixar Video&nbsp;&nbsp;<img style="width: 30px;" src="{{ url_for('static', filename='img/movie.png') }}" />
-                        </button>
+                    <div class="d-flex justify-content-between p-2">
+                        <img src="{{ url_for('static', filename='img/image-icon.png') }}"  style="width: 50px; height: 50px;" alt="">
+                        <img class="seta" src="{{ url_for('static', filename='img/next-icon.png') }}"  style="width: 50px; height: 50px;" alt="">
                     </div>
                 </div>
-            </form>    
-        </div>    
+            </div>
+        </di>
+        <di class="row">
+            <div class="col-md-4 mt-5">
+                <div class="border border-secondary rounded p-2">
+                    <div style="background-color: #ebeef4;" class="p-5 rounded">
+                        <p class="fs-3">Encurtar <br/>URL/LINK</p>
+                    </div>
+                    <div class="d-flex justify-content-between p-2">
+                        <img src="{{ url_for('static', filename='img/link-icon.png') }}"  style="width: 50px; height: 50px;" alt="">
+                        <a href="/encurtarLink">
+                            <img class="seta" src="{{ url_for('static', filename='img/next-icon.png') }}"  style="width: 50px; height: 50px;" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-5">
+                <div class="border border-secondary rounded p-2">
+                    <div style="background-color: #efecf4;" class="p-5 rounded">
+                        <p class="fs-3">Gerador de QR Code de URL/LINK</p>
+                    </div>
+                    <div class="d-flex justify-content-between p-2">
+                        <img src="{{ url_for('static', filename='img/qrcode-icon.png') }}"  style="width: 50px; height: 50px;" alt="">
+                        <a href="/gerarQrCode">
+                            <img class="seta" src="{{ url_for('static', filename='img/next-icon.png') }}"  style="width: 50px; height: 50px;" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-5">
+                <div class="border border-secondary rounded p-2">
+                    <div style="background-color: #f4eada;" class="p-5 rounded">
+                        <p class="fs-3">Compartilhe</p>
+                        <div class="row mt-2">
+                            <img src="{{ url_for('static', filename='img/whats-icon.png') }}"  style="width: 80px;" alt="">
+                            <img src="{{ url_for('static', filename='img/face-icon.png') }}"  style="width: 80px;" alt="">
+                            <img src="{{ url_for('static', filename='img/insta-icon.png') }}"  style="width: 80px;" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </di>
     </div>
-
-    <footer class="footer">
-        <div>
-            <p>© Todos os direitos reservados</p>
-        </div>
-        <div class="align-self-end">
-            <a target="_blank" href="https://diegodev.vercel.app/"><p>Desenvolvido por Diego Oliveira</p></a>
-        </div>
-    </footer>
-
-    <script>
-        document.getElementById('downloadForm').addEventListener('submit', function() {
-            document.getElementById('loadingMessage').style.display = 'block';
-            setTimeout(function() {
-                document.getElementById('loadingMessage').style.display = 'none';
-            }, 8000);
-        });
-
-        document.getElementById('downloadFormVideo').addEventListener('submit', function() {
-            document.getElementById('loadingMessage').style.display = 'block';
-            setTimeout(function() {
-                document.getElementById('loadingMessage').style.display = 'none';
-            }, 8000);
-        });
-    </script>
-</body>
-</html>
+{% endblock  %}
